@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15 Puzzle Flowchart</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .mermaid {
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Блок-схема игры 15</h1>
+        <div class="mermaid">
+            graph TD
+                A[Старт] --> B{Выбор опции}
+                B -->|Опция 1| C[Новая игра]
+                B -->|Опция 2| D[Загрузить сохраненную игру]
+                
+                C --> E[Сброс доски]
+                E --> F[Перемешать доску]
+                
+                D --> G{Загрузка успешна?}
+                G -->|Да| H[Продолжить игру]
+                G -->|Нет| E
+                
+                H --> I[Игровой цикл]
+                F --> I
+                
+                I --> J[Показать ходы и доску]
+                J --> K{Проверка на решение}
+                
+                K -->|Да| L[Показать сообщение о победе]
+                L --> M[Удалить файл сохранения]
+                M --> N[Конец]
+                
+                K -->|Нет| O{Получить ввод пользователя}
+                O -->|Q/q| P[Сохранить игру]
+                P --> Q[Выход]
+                Q --> N
+                
+                O -->|W/A/S/D| R{Ход возможен?}
+                R -->|Да| S[Переместить плитку]
+                S --> T[Увеличить счетчик ходов]
+                T --> U[Автосохранение]
+                U --> I
+                
+                R -->|Нет| V[Показать сообщение об ошибке]
+                V --> I
+                
+                subgraph Функции
+                    AA[Сохранить игру]
+                    BB[Загрузить игру]
+                    CC[Сбросить доску]
+                    DD[Перемешать доску]
+                    EE[Показать доску]
+                    FF[Проверка решения]
+                    GG[Переместить пустую клетку]
+                    HH[Переместить плитку]
+                end
+        </div>
+    </div>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+    </script>
+</body>
+</html>
